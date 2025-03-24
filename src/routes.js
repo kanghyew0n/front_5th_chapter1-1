@@ -1,22 +1,32 @@
 import { ErrorPage, LoginPage, MainPage, ProfilePage } from "./pages";
 
-const loadContent = (content) => {
-  document.body.innerHTML = `${content()}`;
-};
-
 const routes = {
-  "/": () => MainPage(),
-  "/profile": () => ProfilePage(),
-  "/login": () => LoginPage(),
-  "/error": () => ErrorPage(),
+  "/": MainPage,
+  "/profile": ProfilePage,
+  "/login": LoginPage,
 };
 
-export const router = (e) => {
-  e.preventDefault();
-  const path = window.location.pathname;
-  const route = routes[path];
+export const renderPage = (path) => {
+  const pageComponent = routes[path];
 
-  if (!route) return loadContent(routes["/error"]);
+  if (!pageComponent) {
+    document.body.innerHTML = `${ErrorPage()}`;
+  } else {
+    document.body.innerHTML = `${pageComponent()}`;
+  }
+};
 
-  loadContent(route);
+export const render = () => {
+  renderPage(location.pathname);
+
+  document.querySelectorAll("a").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const newPathName = e.target.href.replace(location.origin, "");
+      history.pushState(null, null, newPathName);
+
+      renderPage(newPathName);
+    });
+  });
 };
