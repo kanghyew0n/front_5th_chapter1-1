@@ -30,3 +30,5 @@ export const render = () => {
     });
   });
 };
+
+window.addEventListener("popstate", () => render());
