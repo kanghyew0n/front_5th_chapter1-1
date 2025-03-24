@@ -1,9 +1,8 @@
-import { MainPage } from "./pages/main.js";
+import { router } from "./routes.js";
 
 const app = () => {
-  document.body.innerHTML = `
-  ${MainPage()}
-`;
+  window.addEventListener("hashchange", router);
+  window.addEventListener("load", router);
 };
 
 app();
