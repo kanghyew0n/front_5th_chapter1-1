@@ -8,7 +8,7 @@ export const Header = () => {
       return /* HTML */ `<li>
           <a href="/profile" class="text-gray-600">프로필</a>
         </li>
-        <li><a href="#" class="text-gray-600">로그아웃</a></li>`;
+        <li><a id="logout" href="#" class="text-gray-600">로그아웃</a></li>`;
     } else {
       return /* HTML */ `<li>
         <a href="/login" class="text-gray-600">로그인</a>
