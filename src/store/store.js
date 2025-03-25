@@ -1,18 +1,20 @@
 import { userParam } from "../data/param";
+import { USER_STORAGE_KEY } from "../constants";
 
 export const userStore = {
   init: () => {
-    localStorage.setItem("user", JSON.stringify(userParam));
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userParam));
   },
   setUserInfo: (key, value) => {
-    const originUserInfo = JSON.parse(localStorage.getItem("menu"));
+    const originUserInfo = JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
     const userInfo = { ...originUserInfo, [key]: value };
-    localStorage.setItem("user", JSON.stringify(userInfo));
+
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userInfo));
   },
   getUserInfo: () => {
-    return JSON.parse(localStorage.getItem("user"));
+    return JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
   },
   logout: () => {
-    return localStorage.clear();
+    localStorage.removeItem(USER_STORAGE_KEY);
   },
 };
