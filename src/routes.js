@@ -1,4 +1,5 @@
 import { ErrorPage, LoginPage, MainPage, ProfilePage } from "./pages";
+import { userStore } from "./store/store";
 
 const routes = {
   "/": MainPage,
@@ -8,12 +9,16 @@ const routes = {
 
 export const renderPage = (path) => {
   const pageComponent = routes[path];
+  const userInfo = userStore.getUserInfo();
 
+  // 로그인 필수 path를 관리하는 방법 없을까? 코드에 녹이기는 너무 복잡하다..!
   if (!pageComponent) {
-    document.body.innerHTML = `${ErrorPage()}`;
-  } else {
-    document.body.innerHTML = `${pageComponent()}`;
+    return (document.body.innerHTML = `${ErrorPage()}`);
   }
+  if (!userInfo && path === "/profile") {
+    return (document.body.innerHTML = `${LoginPage()}`);
+  }
+  return (document.body.innerHTML = `${pageComponent()}`);
 };
 
 export const render = () => {
