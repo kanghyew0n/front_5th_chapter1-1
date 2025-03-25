@@ -1,5 +1,6 @@
 import { render } from "./routes.js";
 import { userStore } from "./store/store.js";
+import { handleLogout } from "./utils/logout.js";
 
 const app = () => {
   render();
@@ -54,17 +55,7 @@ const app = () => {
     window.alert("프로필이 업데이트되었어요!");
   });
 
-  // Logout
-  const logoutButton = document.getElementById("logout");
-
-  logoutButton?.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    userStore.logout();
-
-    history.pushState(null, null, "/login");
-    render();
-  });
+  handleLogout();
 };
 
 app();
