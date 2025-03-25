@@ -1,6 +1,7 @@
 import { userParam } from "../data/param";
 import { USER_STORAGE_KEY } from "../constants";
 
+// 강제로 객체형태로 사용하는것이 안전한 형태인지...
 export const userStore = {
   init: () => {
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userParam));
