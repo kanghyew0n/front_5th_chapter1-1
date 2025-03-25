@@ -2,11 +2,16 @@ import { userStore } from "../../store/store";
 
 export const Header = () => {
   const userInfo = userStore.getUserInfo();
+  const path = location.pathname;
 
   const renderNav = () => {
     if (userInfo) {
       return /* HTML */ `<li>
-          <a href="/profile" class="text-gray-600">프로필</a>
+          <a
+            href="/profile"
+            class=${path === "/profile" ? "text-blue-600" : "text-gray-600"}
+            >프로필</a
+          >
         </li>
         <li><a id="logout" href="#" class="text-gray-600">로그아웃</a></li>`;
     } else {
@@ -22,7 +27,11 @@ export const Header = () => {
     </header>
     <nav class="bg-white shadow-md p-2 sticky top-14">
       <ul class="flex justify-around">
-        <li><a href="/" class="text-blue-600">홈</a></li>
+        <li>
+          <a href="/" class=${path === "/" ? "text-blue-600" : "text-gray-600"}
+            >홈</a
+          >
+        </li>
         ${renderNav()}
       </ul>
     </nav>
