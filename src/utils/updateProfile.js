@@ -8,9 +8,10 @@ export const updateProfile = () => {
 
     const { username, email, bio } = userStore.getUserInfo();
 
-    const userNameValue = document.getElementById("username").value;
-    const emailValue = document.getElementById("email").value;
-    const bioValue = document.getElementById("bio").value;
+    const form = document.getElementById("profile-form");
+    const userNameValue = form.username.value;
+    const emailValue = form.email.value;
+    const bioValue = form.bio.value;
 
     if (username !== userNameValue) {
       userStore.setUserInfo("username", userNameValue);
