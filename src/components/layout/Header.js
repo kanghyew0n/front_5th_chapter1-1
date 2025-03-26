@@ -4,8 +4,6 @@ export const Header = () => {
   const isLoggedIn = userStore.loggedIn();
   const path = location.hash === "" ? `#/` : location.hash;
 
-  console.log(window.location);
-
   const renderNavItem = () => {
     if (isLoggedIn) {
       return /* HTML */ `<li>

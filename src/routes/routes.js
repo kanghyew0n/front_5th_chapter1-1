@@ -1,10 +1,11 @@
+import { BASE_PATH } from "../constants";
 import { ErrorPage, LoginPage, MainPage, ProfilePage } from "../pages";
 import { userStore } from "../store/store";
 
 const routes = {
-  "/": MainPage,
-  "/profile": ProfilePage,
-  "/login": LoginPage,
+  [`${BASE_PATH}/`]: MainPage,
+  [`${BASE_PATH}/profile`]: ProfilePage,
+  [`${BASE_PATH}/login`]: LoginPage,
 };
 
 const goTo = (path) => {
@@ -17,11 +18,11 @@ export const render = () => {
   const path = location.pathname;
   const isLoggedIn = userStore.loggedIn();
 
-  if (!isLoggedIn && path === "/profile") {
-    return goTo("/login");
+  if (!isLoggedIn && path === `${BASE_PATH}/profile`) {
+    return goTo(`${BASE_PATH}/login`);
   }
-  if (isLoggedIn && path === "/login") {
-    return goTo("/");
+  if (isLoggedIn && path === `${BASE_PATH}/login`) {
+    return goTo(`${BASE_PATH}/`);
   }
 
   const page = routes[path] || ErrorPage;
@@ -35,7 +36,7 @@ export const render = () => {
     if (e.target.id === "logout") {
       userStore.logout();
 
-      history.pushState(null, null, "/login");
+      history.pushState(null, null, `${BASE_PATH}/login`);
       return render();
     }
 
@@ -61,7 +62,7 @@ export const render = () => {
       userStore.setUserInfo("email", "");
       userStore.setUserInfo("bio", "");
 
-      history.pushState(null, "", "/profile");
+      history.pushState(null, "", `${BASE_PATH}/profile`);
       return render();
     }
 
