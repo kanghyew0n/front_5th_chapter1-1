@@ -2,14 +2,15 @@ import { userStore } from "../../store/store";
 
 export const Header = () => {
   const isLoggedIn = userStore.loggedIn();
-  const path = location.hash === "" ? `#/` : location.hash;
+  const num = location.href.split("/").length;
+  const path = location.href.split("/")[num - 1];
 
   const renderNavItem = () => {
     if (isLoggedIn) {
       return /* HTML */ `<li>
           <a
             href="/profile"
-            class="${path === "#/profile"
+            class="${path === "profile"
               ? "text-blue-600 font-bold"
               : "text-gray-600"}"
             >프로필</a
@@ -32,9 +33,7 @@ export const Header = () => {
         <li>
           <a
             href="/"
-            class="${path === "#/"
-              ? "text-blue-600 font-bold"
-              : "text-gray-600"}"
+            class="${path === "" ? "text-blue-600 font-bold" : "text-gray-600"}"
             >홈</a
           >
         </li>
