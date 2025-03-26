@@ -1,10 +1,10 @@
-import { ErrorPage, LoginPage, MainPage, ProfilePage } from "./pages";
-import { userStore } from "./store/store";
+import { ErrorPage, LoginPage, MainPage, ProfilePage } from "../pages";
+import { userStore } from "../store/store";
 
 const routes = {
-  "/": MainPage,
-  "/profile": ProfilePage,
-  "/login": LoginPage,
+  "#/": MainPage,
+  "#/profile": ProfilePage,
+  "#/login": LoginPage,
 };
 
 const goTo = (path) => {
@@ -14,14 +14,16 @@ const goTo = (path) => {
 
 export const render = () => {
   const root = document.getElementById("root");
-  const path = location.pathname;
+  const path = location.hash === "" ? "#/" : location.hash;
+
+  console.log(location, path);
   const isLoggedIn = userStore.loggedIn();
 
-  if (!isLoggedIn && path === "/profile") {
-    return goTo("/login");
+  if (!isLoggedIn && path === "#/profile") {
+    return goTo("#/login");
   }
-  if (isLoggedIn && path === "/login") {
-    return goTo("/");
+  if (isLoggedIn && path === "#/login") {
+    return goTo("#/");
   }
 
   const page = routes[path] || ErrorPage;
@@ -35,11 +37,13 @@ export const render = () => {
     if (e.target.id === "logout") {
       userStore.logout();
 
-      history.pushState(null, null, "/login");
+      history.pushState(null, null, "#/login");
       return render();
     }
 
-    goTo(target.pathname);
+    console.log("target.pathname", target.pathname);
+
+    goTo(`#${target.pathname}`);
   });
 
   root.addEventListener("submit", (e) => {
@@ -51,17 +55,12 @@ export const render = () => {
       if (!username || !username.trim()) {
         return window.alert("이름을 입력해주세요.");
       }
-      // 이거 ....
-      // const password = e.target.elements.password.value;
-      // if (!password || !password.trim()) {
-      //   return window.alert("비밀번호를 입력해주세요.");
-      // }
 
       userStore.setUserInfo("username", username);
       userStore.setUserInfo("email", "");
       userStore.setUserInfo("bio", "");
 
-      history.pushState(null, "", "/profile");
+      history.pushState(null, "", "#/profile");
       return render();
     }
 

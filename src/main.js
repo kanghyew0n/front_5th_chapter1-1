@@ -1,4 +1,4 @@
-import { render } from "./routes.js";
+import { render } from "./routes/routes.js";
 
 const app = () => {
   render();

@@ -2,14 +2,18 @@ import { userStore } from "../../store/store";
 
 export const Header = () => {
   const isLoggedIn = userStore.loggedIn();
-  const path = location.pathname;
+  const path = location.hash === "" ? `#/` : location.hash;
+
+  console.log(window.location);
 
   const renderNavItem = () => {
     if (isLoggedIn) {
       return /* HTML */ `<li>
           <a
             href="/profile"
-            class=${path === "/profile" ? "text-blue-600" : "text-gray-600"}
+            class="${path === "#/profile"
+              ? "text-blue-600 font-bold"
+              : "text-gray-600"}"
             >프로필</a
           >
         </li>
@@ -28,7 +32,11 @@ export const Header = () => {
     <nav class="bg-white shadow-md p-2 sticky top-14">
       <ul class="flex justify-around">
         <li>
-          <a href="/" class=${path === "/" ? "text-blue-600" : "text-gray-600"}
+          <a
+            href="/"
+            class="${path === "#/"
+              ? "text-blue-600 font-bold"
+              : "text-gray-600"}"
             >홈</a
           >
         </li>
