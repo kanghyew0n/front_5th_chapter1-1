@@ -42,9 +42,7 @@ export const render = () => {
       return render();
     }
 
-    console.log("target.pathname", target.pathname);
-
-    goTo(`#${target.pathname}`);
+    goTo(`${BASE_PATH}#${target.pathname}`);
   });
 
   root.addEventListener("submit", (e) => {
