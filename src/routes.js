@@ -7,30 +7,81 @@ const routes = {
   "/login": LoginPage,
 };
 
-export const renderPage = (path) => {
-  const pageComponent = routes[path];
-  const userInfo = userStore.getUserInfo();
-
-  // 로그인 필수 path를 관리하는 방법 없을까? 코드에 녹이기는 너무 복잡하다..!
-  if (!pageComponent) {
-    return (document.body.innerHTML = `${ErrorPage()}`);
-  }
-  if (!userInfo && path === "/profile") {
-    return (document.body.innerHTML = `${LoginPage()}`);
-  }
-  return (document.body.innerHTML = `${pageComponent()}`);
+const goTo = (path) => {
+  history.pushState(null, null, path);
+  render();
 };
 
 export const render = () => {
-  renderPage(location.pathname);
+  const root = document.getElementById("root");
+  const path = location.pathname;
+  const isLoggedIn = userStore.loggedIn();
 
-  document.body.addEventListener("click", (e) => {
-    if (e.target.tagName === "A") {
+  if (!isLoggedIn && path === "/profile") {
+    return goTo("/login");
+  }
+  if (isLoggedIn && path === "/login") {
+    return goTo("/");
+  }
+
+  const page = routes[path] || ErrorPage;
+  root.innerHTML = page();
+
+  root.addEventListener("click", (e) => {
+    const target = e.target.closest("a");
+    if (!target) return;
+
+    e.preventDefault();
+    if (e.target.id === "logout") {
+      userStore.logout();
+
+      history.pushState(null, null, "/login");
+      return render();
+    }
+
+    goTo(target.pathname);
+  });
+
+  root.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if (e.target.id === "login-form") {
+      const username = e.target.elements.username.value;
+
+      if (!username || !username.trim()) {
+        return window.alert("이름을 입력해주세요.");
+      }
+      // 이거 ....
+      // const password = e.target.elements.password.value;
+      // if (!password || !password.trim()) {
+      //   return window.alert("비밀번호를 입력해주세요.");
+      // }
+
+      userStore.setUserInfo("username", username);
+      userStore.setUserInfo("email", "");
+      userStore.setUserInfo("bio", "");
+
+      history.pushState(null, "", "/profile");
+      return render();
+    }
+
+    if (e.target.id === "profile-form") {
       e.preventDefault();
-      const newPathName = e.target.href.replace(location.origin, "");
-      history.pushState(null, null, newPathName);
+      const { username, email, bio } = userStore.getUserInfo();
 
-      renderPage(newPathName);
+      const userNameValue = e.target.elements.username.value;
+      const emailValue = e.target.elements.email.value;
+      const bioValue = e.target.elements.bio.value;
+
+      if (username !== userNameValue) {
+        userStore.setUserInfo("username", userNameValue);
+      }
+      if (email !== emailValue) {
+        userStore.setUserInfo("email", emailValue);
+      }
+      if (bio !== bioValue) {
+        userStore.setUserInfo("bio", bioValue);
+      }
     }
   });
 };

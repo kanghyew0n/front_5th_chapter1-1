@@ -1,29 +1,21 @@
-import { render } from "../routes";
 import { userStore } from "../store/store";
 
 export const handleLogin = () => {
-  const loginSubmitButton = document.getElementById("login-submit");
+  const form = document.getElementById("login-form");
 
-  loginSubmitButton?.addEventListener("click", (e) => {
-    e.preventDefault();
+  const username = form.username.value;
+  const password = form.password.value;
 
-    const form = document.getElementById("login-form");
+  if (!username || !username.trim()) {
+    return window.alert("이름을 입력해주세요.");
+  }
+  if (!password || !password.trim()) {
+    return window.alert("비밀번호를 입력해주세요.");
+  }
 
-    const username = form.username.value;
-    const password = form.password.value;
+  userStore.setUserInfo("username", username);
+  userStore.setUserInfo("email", "");
+  userStore.setUserInfo("bio", "");
 
-    if (!username || !username.trim()) {
-      return window.alert("이름을 입력해주세요.");
-    }
-    if (!password || !password.trim()) {
-      return window.alert("비밀번호를 입력해주세요.");
-    }
-
-    userStore.setUserInfo("username", username);
-    userStore.setUserInfo("email", "");
-    userStore.setUserInfo("bio", "");
-
-    history.pushState(null, "", "/profile");
-    render();
-  });
+  history.pushState(null, "", "/profile");
 };

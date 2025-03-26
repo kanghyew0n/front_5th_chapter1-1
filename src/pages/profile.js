@@ -3,7 +3,7 @@ import { userStore } from "../store/store";
 
 // 너무 매번 store를 부르나? 인자로 전달하는게 나을까나
 export const ProfilePage = () => {
-  const { username, email, bio } = userStore.getUserInfo();
+  const { username = "", email = "", bio = "" } = userStore.getUserInfo();
 
   return /* HTML */ `
     <div id="root">
@@ -26,7 +26,7 @@ export const ProfilePage = () => {
                     type="text"
                     id="username"
                     name="username"
-                    value=${username}
+                    value="${username}"
                     class="w-full p-2 border rounded"
                   />
                 </div>
@@ -40,7 +40,7 @@ export const ProfilePage = () => {
                     type="email"
                     id="email"
                     name="email"
-                    value=${email}
+                    value="${email}"
                     class="w-full p-2 border rounded"
                   />
                 </div>

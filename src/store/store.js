@@ -15,6 +15,9 @@ export const userStore = {
   getUserInfo: () => {
     return JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
   },
+  loggedIn: () => {
+    return !!JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
+  },
   logout: () => {
     localStorage.removeItem(USER_STORAGE_KEY);
   },

@@ -1,11 +1,11 @@
 import { userStore } from "../../store/store";
 
 export const Header = () => {
-  const userInfo = userStore.getUserInfo();
+  const isLoggedIn = userStore.loggedIn();
   const path = location.pathname;
 
-  const renderNav = () => {
-    if (userInfo) {
+  const renderNavItem = () => {
+    if (isLoggedIn) {
       return /* HTML */ `<li>
           <a
             href="/profile"
@@ -32,7 +32,7 @@ export const Header = () => {
             >홈</a
           >
         </li>
-        ${renderNav()}
+        ${renderNavItem()}
       </ul>
     </nav>
   `;
