@@ -1,4 +1,4 @@
-(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))n(t);new MutationObserver(t=>{for(const e of t)if(e.type==="childList")for(const d of e.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&n(d)}).observe(document,{childList:!0,subtree:!0});function a(t){const e={};return t.integrity&&(e.integrity=t.integrity),t.referrerPolicy&&(e.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?e.credentials="include":t.crossOrigin==="anonymous"?e.credentials="omit":e.credentials="same-origin",e}function n(t){if(t.ep)return;t.ep=!0;const e=a(t);fetch(t.href,e)}})();const i="user",r="/front_5th_chapter1-1",x={username:"홍길동",email:"hong@example.com",password:"1234",bio:"안녕하세요, 항해플러스에서 열심히 공부하고 있는 홍길동입니다."},o={init:()=>{localStorage.setItem(i,JSON.stringify(x))},setUserInfo:(l,s)=>{const n={...JSON.parse(localStorage.getItem(i)),[l]:s};localStorage.setItem(i,JSON.stringify(n))},getUserInfo:()=>JSON.parse(localStorage.getItem(i)),loggedIn:()=>!!JSON.parse(localStorage.getItem(i)),logout:()=>{localStorage.removeItem(i)}},p=()=>{const l=o.loggedIn(),s=location.hash===""?"#/":location.hash;return`
+(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))a(t);new MutationObserver(t=>{for(const e of t)if(e.type==="childList")for(const d of e.addedNodes)d.tagName==="LINK"&&d.rel==="modulepreload"&&a(d)}).observe(document,{childList:!0,subtree:!0});function r(t){const e={};return t.integrity&&(e.integrity=t.integrity),t.referrerPolicy&&(e.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?e.credentials="include":t.crossOrigin==="anonymous"?e.credentials="omit":e.credentials="same-origin",e}function a(t){if(t.ep)return;t.ep=!0;const e=r(t);fetch(t.href,e)}})();const i="user",n="/front_5th_chapter1-1",x={username:"홍길동",email:"hong@example.com",password:"1234",bio:"안녕하세요, 항해플러스에서 열심히 공부하고 있는 홍길동입니다."},o={init:()=>{localStorage.setItem(i,JSON.stringify(x))},setUserInfo:(l,s)=>{const a={...JSON.parse(localStorage.getItem(i)),[l]:s};localStorage.setItem(i,JSON.stringify(a))},getUserInfo:()=>JSON.parse(localStorage.getItem(i)),loggedIn:()=>!!JSON.parse(localStorage.getItem(i)),logout:()=>{localStorage.removeItem(i)}},p=()=>{const l=o.loggedIn(),s=location.href.split("/").length,r=location.href.split("/")[s-1];return`
     <header class="bg-blue-600 text-white p-4 sticky top-0">
       <h1 class="text-2xl font-bold">항해플러스</h1>
     </header>
@@ -7,14 +7,14 @@
         <li>
           <a
             href="/"
-            class="${s==="#/"?"text-blue-600 font-bold":"text-gray-600"}"
+            class="${r===""?"text-blue-600 font-bold":"text-gray-600"}"
             >홈</a
           >
         </li>
         ${l?`<li>
           <a
             href="/profile"
-            class="${s==="#/profile"?"text-blue-600 font-bold":"text-gray-600"}"
+            class="${r==="profile"?"text-blue-600 font-bold":"text-gray-600"}"
             >프로필</a
           >
         </li>
@@ -147,7 +147,7 @@
       ${g}
     </div>
   </div>
-`,y=()=>{const{username:l="",email:s="",bio:a=""}=o.getUserInfo();return`
+`,y=()=>{const{username:l="",email:s="",bio:r=""}=o.getUserInfo();return`
     <div id="root">
       <div class="bg-gray-100 min-h-screen flex justify-center">
         <div class="max-w-md w-full">
@@ -198,7 +198,7 @@
                     rows="4"
                     class="w-full p-2 border rounded"
                   >
-${a}</textarea
+${r}</textarea
                   >
                 </div>
                 <button
@@ -275,4 +275,4 @@ ${a}</textarea
       </a>
     </div>
   </main>
-`,$={[`${r}/`]:h,[`${r}/profile`]:y,[`${r}/login`]:w},u=l=>{history.pushState(null,null,l),c()},c=()=>{const l=document.getElementById("root"),s=location.pathname,a=o.loggedIn();if(!a&&s===`${r}/profile`)return u(`${r}/login`);if(a&&s===`${r}/login`)return u(`${r}/`);const n=$[s]||I;l.innerHTML=n(),l.addEventListener("click",t=>{const e=t.target.closest("a");if(e){if(t.preventDefault(),t.target.id==="logout")return o.logout(),history.pushState(null,null,`${r}/login`),c();u(`${r+e.pathname}`)}}),l.addEventListener("submit",t=>{if(t.preventDefault(),t.target.id==="login-form"){const e=t.target.elements.username.value;return!e||!e.trim()?window.alert("이름을 입력해주세요."):(o.setUserInfo("username",e),o.setUserInfo("email",""),o.setUserInfo("bio",""),history.pushState(null,"",`${r}/profile`),c())}if(t.target.id==="profile-form"){t.preventDefault();const{username:e,email:d,bio:v}=o.getUserInfo(),m=t.target.elements.username.value,b=t.target.elements.email.value,f=t.target.elements.bio.value;e!==m&&o.setUserInfo("username",m),d!==b&&o.setUserInfo("email",b),v!==f&&o.setUserInfo("bio",f)}})};window.addEventListener("popstate",()=>c());const S=()=>{c()};S();
+`,$={[`${n}/`]:h,[`${n}/profile`]:y,[`${n}/login`]:w},u=l=>{history.pushState(null,null,l),c()},c=()=>{const l=document.getElementById("root"),s=location.pathname,r=o.loggedIn();if(!r&&s===`${n}/profile`)return u(`${n}/login`);if(r&&s===`${n}/login`)return u(`${n}/`);const a=$[s]||I;l.innerHTML=a(),l.addEventListener("click",t=>{const e=t.target.closest("a");if(e){if(t.preventDefault(),t.target.id==="logout")return o.logout(),history.pushState(null,null,`${n}/login`),c();u(`${n+e.pathname}`)}}),l.addEventListener("submit",t=>{if(t.preventDefault(),t.target.id==="login-form"){const e=t.target.elements.username.value;return!e||!e.trim()?window.alert("이름을 입력해주세요."):(o.setUserInfo("username",e),o.setUserInfo("email",""),o.setUserInfo("bio",""),history.pushState(null,"",`${n}/profile`),c())}if(t.target.id==="profile-form"){t.preventDefault();const{username:e,email:d,bio:v}=o.getUserInfo(),m=t.target.elements.username.value,b=t.target.elements.email.value,f=t.target.elements.bio.value;e!==m&&o.setUserInfo("username",m),d!==b&&o.setUserInfo("email",b),v!==f&&o.setUserInfo("bio",f)}})};window.addEventListener("popstate",()=>c());const S=()=>{c()};S();
