@@ -6,11 +6,29 @@ export const userStore = {
   init: () => {
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userParam));
   },
-  setUserInfo: (key, value) => {
+  setUserInfo: (userInfo) => {
+    const { username, email, bio } = userInfo;
     const originUserInfo = JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
-    const userInfo = { ...originUserInfo, [key]: value };
 
-    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userInfo));
+    // 로그인시
+    if (!originUserInfo) {
+      return localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userInfo));
+    }
+
+    // 프로필 수정시
+    const newUserInfo = { ...originUserInfo };
+
+    if (originUserInfo?.username !== username) {
+      newUserInfo.username = username;
+    }
+    if (originUserInfo?.email !== email) {
+      newUserInfo.email = email;
+    }
+    if (originUserInfo?.bio !== bio) {
+      newUserInfo.bio = bio;
+    }
+
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUserInfo));
   },
   getUserInfo: () => {
     return JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
