@@ -56,7 +56,7 @@ export const render = () => {
 
       if (e.target.id === "login-form") {
         handleLogin(e.target.elements);
-        renderPageWithHistory("/profile");
+        renderPageWithHistory(`${BASE_PATH}/profile`);
       }
 
       if (e.target.id === "profile-form") {
