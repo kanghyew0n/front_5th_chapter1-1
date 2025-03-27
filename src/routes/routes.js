@@ -13,7 +13,7 @@ const renderPageWithHistory = (path) => {
   render();
 };
 
-const handleLogout = (elements) => {
+const handleLogin = (elements) => {
   const username = elements.username.value;
 
   if (!username || !username.trim()) {
@@ -49,31 +49,43 @@ export const render = () => {
   const page = routes[path] || ErrorPage;
   root.innerHTML = page();
 
-  root.addEventListener("click", (e) => {
-    const target = e.target.closest("a");
-    if (!target) return;
+  root.addEventListener(
+    "click",
+    (e) => {
+      const target = e.target.closest("a");
+      if (!target) return;
 
-    e.preventDefault();
+      e.preventDefault();
 
-    if (e.target.id === "logout") {
-      userStore.logout();
-      renderPageWithHistory(`${BASE_PATH}/login`);
-    }
+      if (e.target.id === "logout") {
+        userStore.logout();
+        renderPageWithHistory(`${BASE_PATH}/login`);
+      }
 
-    renderPageWithHistory(`${BASE_PATH + target.pathname}`);
-  });
+      renderPageWithHistory(`${BASE_PATH + target.pathname}`);
+    },
+    {
+      once: true,
+    },
+  );
 
-  root.addEventListener("submit", (e) => {
-    e.preventDefault();
+  root.addEventListener(
+    "submit",
+    (e) => {
+      e.preventDefault();
 
-    if (e.target.id === "login-form") {
-      handleLogout(e.target.elements);
-    }
+      if (e.target.id === "login-form") {
+        handleLogin(e.target.elements);
+      }
 
-    if (e.target.id === "profile-form") {
-      updateProfile(e.target.elements);
-    }
-  });
+      if (e.target.id === "profile-form") {
+        updateProfile(e.target.elements);
+      }
+    },
+    {
+      once: true,
+    },
+  );
 };
 
 window.addEventListener("popstate", () => render());
