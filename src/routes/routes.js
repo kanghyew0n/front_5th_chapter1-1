@@ -30,6 +30,7 @@ const updateProfile = (elements) => {
   const bio = elements.bio.value;
 
   userStore.setUserInfo({ username, email, bio });
+  alert("프로필이 업데이트 되었어요!");
 };
 
 export const render = () => {
