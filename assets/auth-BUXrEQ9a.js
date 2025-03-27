@@ -1,4 +1,4 @@
-(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))l(e);new MutationObserver(e=>{for(const r of e)if(r.type==="childList")for(const a of r.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&l(a)}).observe(document,{childList:!0,subtree:!0});function o(e){const r={};return e.integrity&&(r.integrity=e.integrity),e.referrerPolicy&&(r.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?r.credentials="include":e.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function l(e){if(e.ep)return;e.ep=!0;const r=o(e);fetch(e.href,r)}})();const c="user",n="/front_5th_chapter1-1";let u=null;const g=()=>{if(u)return u;const t={userInfo:JSON.parse(localStorage.getItem(c)),setUserInfo(s){const o=this.userInfo;if(!o)return this.userInfo=s,localStorage.setItem(c,JSON.stringify(s));const{username:l,email:e,bio:r}=s,a={...o,...o.username!==l&&{username:l},...o.email!==e&&{email:e},...o.bio!==r&&{bio:r}};this.userInfo=a,localStorage.setItem(c,JSON.stringify(a))},getUserInfo(){return this.userInfo},loggedIn(){return!!this.userInfo},logout(){this.userInfo=null,localStorage.removeItem(c)}};return u=t,t},i=g(),f=()=>{const t=i.loggedIn(),s=location.href.split("/").length,o=location.href.split("/")[s-1];return`
+(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))l(t);new MutationObserver(t=>{for(const o of t)if(o.type==="childList")for(const a of o.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&l(a)}).observe(document,{childList:!0,subtree:!0});function r(t){const o={};return t.integrity&&(o.integrity=t.integrity),t.referrerPolicy&&(o.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?o.credentials="include":t.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function l(t){if(t.ep)return;t.ep=!0;const o=r(t);fetch(t.href,o)}})();const n="user",p="/front_5th_chapter1-1";let d=null;const m=()=>{if(d)return d;const s={userInfo:JSON.parse(localStorage.getItem(n)),setUserInfo(e){const r=this.userInfo;if(!r)return this.userInfo=e,localStorage.setItem(n,JSON.stringify(e));const{username:l,email:t,bio:o}=e,a={...r,...r.username!==l&&{username:l},...r.email!==t&&{email:t},...r.bio!==o&&{bio:o}};this.userInfo=a,localStorage.setItem(n,JSON.stringify(a))},getUserInfo(){return this.userInfo},loggedIn(){return!!this.userInfo},logout(){this.userInfo=null,localStorage.removeItem(n)}};return d=s,s},i=m(),c=()=>{const s=i.loggedIn(),e=location.href.split("/").length,r=location.href.split("/")[e-1];return`
     <header class="bg-blue-600 text-white p-4 sticky top-0">
       <h1 class="text-2xl font-bold">항해플러스</h1>
     </header>
@@ -7,14 +7,14 @@
         <li>
           <a
             href="/"
-            class="${o===""?"text-blue-600 font-bold":"text-gray-600"}"
+            class="${r===""?"text-blue-600 font-bold":"text-gray-600"}"
             >홈</a
           >
         </li>
-        ${t?`<li>
+        ${s?`<li>
           <a
             href="/profile"
-            class="${o==="profile"?"text-blue-600 font-bold":"text-gray-600"}"
+            class="${r==="profile"?"text-blue-600 font-bold":"text-gray-600"}"
             >프로필</a
           >
         </li>
@@ -23,9 +23,9 @@
       </li>`}
       </ul>
     </nav>
-  `},b=` <footer class="bg-gray-200 p-4 text-center">
+  `},u=` <footer class="bg-gray-200 p-4 text-center">
   <p>&copy; 2024 항해플러스. All rights reserved.</p>
-</footer>`,p=({name:t,createdAt:s,message:o})=>`<div class="bg-white rounded-lg shadow p-4">
+</footer>`,f=({name:s,createdAt:e,message:r})=>`<div class="bg-white rounded-lg shadow p-4">
                 <div class="flex items-center mb-2">
                   <img
                     src="https://placehold.co/40"
@@ -33,20 +33,20 @@
                     class="rounded-full mr-2"
                   />
                   <div>
-                    <p class="font-bold">${t}</p>
-                    <p class="text-sm text-gray-500">${s}</p>
+                    <p class="font-bold">${s}</p>
+                    <p class="text-sm text-gray-500">${e}</p>
                   </div>
                 </div>
-                <p>${o}</p>
+                <p>${r}</p>
                 <div class="mt-2 flex justify-between text-gray-500">
                   <button>좋아요</button>
                   <button>댓글</button>
                   <button>공유</button>
                 </div>
-              </div>`,h=[{id:1,name:"김철수",createdAt:"15분 전",message:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{id:2,name:"이영희",createdAt:"30분 전",message:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{id:3,name:"박민수",createdAt:"1시간 전",message:"주말에 등산 가실 분 계신가요? 함께 가요!"},{id:4,name:"정수연",createdAt:"2시간 전",message:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}],x=()=>`
+              </div>`,b=[{id:1,name:"김철수",createdAt:"15분 전",message:"새로운 프로젝트를 시작했어요. 열심히 코딩 중입니다!"},{id:2,name:"이영희",createdAt:"30분 전",message:"오늘 점심 메뉴 추천 받습니다. 뭐가 좋을까요?"},{id:3,name:"박민수",createdAt:"1시간 전",message:"주말에 등산 가실 분 계신가요? 함께 가요!"},{id:4,name:"정수연",createdAt:"2시간 전",message:"새로 나온 영화 재미있대요. 같이 보러 갈 사람?"}],g=()=>`
   <div class="bg-gray-100 min-h-screen flex justify-center">
     <div class="max-w-md w-full">
-      ${f()}
+      ${c()}
       <main class="p-4">
         <div class="mb-4 bg-white rounded-lg shadow p-4">
           <textarea
@@ -58,17 +58,17 @@
           </button>
         </div>
         <div class="space-y-4">
-          ${h.map(t=>p(t)).join("")}
+          ${b.map(s=>f(s)).join("")}
         </div>
       </main>
-      ${b}
+      ${u}
     </div>
   </div>
-`,v=()=>{const{username:t="",email:s="",bio:o=""}=i.getUserInfo();return`
+`,x=()=>{const{username:s="",email:e="",bio:r=""}=i.getUserInfo();return`
     <div id="root">
       <div class="bg-gray-100 min-h-screen flex justify-center">
         <div class="max-w-md w-full">
-          ${f()}
+          ${c()}
           <main class="p-4">
             <div class="bg-white p-8 rounded-lg shadow-md">
               <h2 class="text-2xl font-bold text-center text-blue-600 mb-8">
@@ -85,7 +85,7 @@
                     type="text"
                     id="username"
                     name="username"
-                    value="${t}"
+                    value="${s}"
                     class="w-full p-2 border rounded"
                   />
                 </div>
@@ -99,7 +99,7 @@
                     type="email"
                     id="email"
                     name="email"
-                    value="${s}"
+                    value="${e}"
                     class="w-full p-2 border rounded"
                   />
                 </div>
@@ -115,7 +115,7 @@
                     rows="4"
                     class="w-full p-2 border rounded"
                   >
-${o}</textarea
+${r}</textarea
                   >
                 </div>
                 <button
@@ -129,11 +129,11 @@ ${o}</textarea
             </div>
           </main>
 
-          ${b}
+          ${u}
         </div>
       </div>
     </div>
-  `},y=()=>`
+  `},h=()=>`
   <main class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
       <h1 class="text-2xl font-bold text-center text-blue-600 mb-8">
@@ -175,7 +175,7 @@ ${o}</textarea
       </div>
     </div>
   </main>
-`,w=()=>`
+`,v=()=>`
   <main class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div
       class="bg-white p-8 rounded-lg shadow-md w-full text-center"
@@ -192,4 +192,4 @@ ${o}</textarea
       </a>
     </div>
   </main>
-`,I={[`${n}/`]:x,[`${n}/profile`]:v,[`${n}/login`]:y},d=t=>{history.pushState(null,null,t),m()},$=t=>{const s=t.username.value;if(!s||!s.trim())return window.alert("이름을 입력해주세요.");i.setUserInfo({username:s,email:"",bio:""}),d(`${n}/profile`)},S=t=>{const s=t.username.value,o=t.email.value,l=t.bio.value;i.setUserInfo({username:s,email:o,bio:l}),alert("프로필이 업데이트 되었어요!")},m=()=>{const t=document.getElementById("root"),s=location.pathname,o=i.loggedIn();if(!o&&s===`${n}/profile`)return d(`${n}/login`);if(o&&s===`${n}/login`)return d(`${n}/`);const l=I[s]||w;t.innerHTML=l(),t.addEventListener("click",e=>{const r=e.target.closest("a");r&&(e.preventDefault(),e.target.id==="logout"&&(i.logout(),d(`${n}/login`)),d(`${n+r.pathname}`))},{once:!0}),t.addEventListener("submit",e=>{e.preventDefault(),e.target.id==="login-form"&&$(e.target.elements),e.target.id==="profile-form"&&S(e.target.elements)},{once:!0})};window.addEventListener("popstate",()=>m());const P=()=>{m()};P();
+`,y=s=>{const e=s.username.value;if(!e||!e.trim())return window.alert("이름을 입력해주세요.");i.setUserInfo({username:e,email:"",bio:""})},w=s=>{const e=s.username.value,r=s.email.value,l=s.bio.value;i.setUserInfo({username:e,email:r,bio:l}),alert("프로필이 업데이트 되었어요!")};export{p as B,v as E,h as L,g as M,x as P,w as a,y as h,i as u};
