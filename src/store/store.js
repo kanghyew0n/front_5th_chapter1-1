@@ -1,32 +1,27 @@
 import { userParam } from "../data/param";
 import { USER_STORAGE_KEY } from "../constants";
 
-// 강제로 객체형태로 사용하는것이 안전한 형태인지...
 export const userStore = {
   init: () => {
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userParam));
   },
   setUserInfo: (userInfo) => {
     const { username, email, bio } = userInfo;
-    const originUserInfo = JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
+    const originUserInfo = userStore.getUserInfo();
 
-    // 로그인시
+    // 로그인 시
     if (!originUserInfo) {
-      return localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userInfo));
+      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userInfo));
+      return;
     }
 
-    // 프로필 수정시
-    const newUserInfo = { ...originUserInfo };
-
-    if (originUserInfo?.username !== username) {
-      newUserInfo.username = username;
-    }
-    if (originUserInfo?.email !== email) {
-      newUserInfo.email = email;
-    }
-    if (originUserInfo?.bio !== bio) {
-      newUserInfo.bio = bio;
-    }
+    // 프로필 수정 시
+    const newUserInfo = {
+      ...originUserInfo,
+      ...(originUserInfo.username !== username && { username }),
+      ...(originUserInfo.email !== email && { email }),
+      ...(originUserInfo.bio !== bio && { bio }),
+    };
 
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUserInfo));
   },
@@ -34,7 +29,7 @@ export const userStore = {
     return JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
   },
   loggedIn: () => {
-    return !!JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
+    return !!userStore.getUserInfo();
   },
   logout: () => {
     localStorage.removeItem(USER_STORAGE_KEY);
