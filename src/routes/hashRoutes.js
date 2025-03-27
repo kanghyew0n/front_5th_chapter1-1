@@ -9,7 +9,7 @@ const routes = {
 };
 
 const goTo = (path) => {
-  history.pushState(null, null, path);
+  window.location.hash = path;
   render();
 };
 
@@ -84,4 +84,4 @@ export const render = () => {
   });
 };
 
-window.addEventListener("popstate", () => render());
+window.addEventListener("hashchange", () => render());
