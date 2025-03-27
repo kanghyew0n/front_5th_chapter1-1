@@ -1,6 +1,8 @@
-import { BASE_PATH } from "../constants";
 import { ErrorPage, LoginPage, MainPage, ProfilePage } from "../pages";
 import { userStore } from "../store/store";
+
+export const BASE_PATH =
+  process.env.NODE_ENV === "production" ? "/front_5th_chapter1-1" : "";
 
 const routes = {
   [`${BASE_PATH}#/`]: MainPage,
