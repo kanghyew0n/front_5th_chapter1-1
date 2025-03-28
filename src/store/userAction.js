@@ -1,4 +1,4 @@
-import { userStore } from "../store/store";
+import { userStore } from "./store";
 
 export const handleLogin = (elements) => {
   const username = elements.username.value;

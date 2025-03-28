@@ -1,7 +1,7 @@
-import { render } from "./routes/routes.js";
+import { render } from "./routes/router.js";
 
 const app = () => {
-  render();
+  render("history");
 };
 
 app();
