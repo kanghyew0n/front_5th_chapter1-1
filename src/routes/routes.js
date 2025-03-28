@@ -2,6 +2,7 @@ import { BASE_PATH } from "../constants";
 import { ErrorPage, LoginPage, MainPage, ProfilePage } from "../pages";
 import { userStore } from "../store/store";
 import { handleLogin, updateProfile } from "../services/auth";
+
 const routes = {
   [`${BASE_PATH}/`]: MainPage,
   [`${BASE_PATH}/profile`]: ProfilePage,
@@ -69,4 +70,4 @@ export const render = () => {
   );
 };
 
-window.addEventListener("popstate", () => render());
+window.addEventListener("popstate", render);
