@@ -192,4 +192,4 @@ ${r}</textarea
       </a>
     </div>
   </main>
-`,y=s=>{const e=s.username.value;if(!e||!e.trim())return window.alert("이름을 입력해주세요.");i.setUserInfo({username:e,email:"",bio:""})},w=s=>{const e=s.username.value,r=s.email.value,l=s.bio.value;i.setUserInfo({username:e,email:r,bio:l}),alert("프로필이 업데이트 되었어요!")};export{p as B,v as E,h as L,g as M,x as P,w as a,y as h,i as u};
+`,y=s=>{const e=s.username.value;if(!e||!e.trim())return window.alert("이름을 입력해주세요.");i.setUserInfo({username:e,email:"",bio:""})},w=s=>{const e=s.username.value,r=s.email.value,l=s.bio.value;i.setUserInfo({username:e,email:r,bio:l})};export{p as B,v as E,h as L,g as M,x as P,w as a,y as h,i as u};
