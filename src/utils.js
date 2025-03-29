@@ -1,6 +1,6 @@
 import { BASE_HISTORY_ROUTER } from "./constants.js";
 import { LoginPage } from "./pages/login.js";
-import { MainPage } from "./pages/Main.js";
+import { MainPage } from "./pages/main.js";
 import { ProfilePage } from "./pages/profile.js";
 
 export const getBasePath = (routeType) => {
